@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Juganta Kaushik Boruah — Front-end Portfolio</title>
+  <meta name="description" content="Juganta — Front-end developer (HTML · CSS · JavaScript). NIT Silchar, BTech CSE 2025-2029. Freelance landing pages, portfolios & websites." />
+  <style>
+    /* ----------------- Utility & Variables ----------------- */
+    :root{
+      --bg1: #0f172a; /* deep night */
+      --bg2: #061328; /* darker blue */
+      --glass: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.75);
+      --accentA: #7c3aed; /* purple */
+      --accentB: #06b6d4; /* cyan */
+      --accentC: #f97316; /* orange */
+      --card-grad: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      --glass-border: rgba(255,255,255,0.08);
+      --glass-blur: 10px;
+      --maxWidth: 1100px;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+      --smooth: cubic-bezier(.2,.9,.25,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.12), transparent 10%),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(6,182,212,0.08), transparent 8%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* animated background glow */
+    .bg-anim{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:screen}
+    .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.8;animation:float 8s ease-in-out infinite}
+    .blob.a{width:520px;height:520px;left:-10%;top:5%;background:linear-gradient(90deg,var(--accentA),var(--accentB));animation-duration:10s}
+    .blob.b{width:420px;height:420px;right:-8%;bottom:10%;background:linear-gradient(90deg,var(--accentB),var(--accentC));animation-duration:12s}
+    @keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(20px)}100%{transform:translateY(0) translateX(0)}}
+
+    /* page container */
+    .wrap{position:relative;max-width:var(--maxWidth);margin:36px auto;padding:28px;z-index:2}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{font-weight:800;letter-spacing:0.6px;font-size:18px;background:linear-gradient(90deg,var(--accentA),var(--accentB));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .tag{font-size:12px;color:var(--muted);font-weight:600}
+
+    nav{display:flex;gap:10px}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .28s var(--smooth);font-size:14px}
+    nav a:hover{transform:translateY(-3px);background:rgba(255,255,255,0.03);color:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+    .glass{
+      background:var(--card-grad);
+      border:1px solid var(--glass-border);
+      backdrop-filter:blur(var(--glass-blur));
+      padding:28px;border-radius:16px;box-shadow:0 10px 40px rgba(2,6,23,0.6);
+      transition:transform .35s var(--smooth), box-shadow .35s var(--smooth);
+    }
+    .glass:hover{transform:translateY(-6px);box-shadow:0 18px 56px rgba(2,6,23,0.7)}
+
+    h1{font-size:34px;margin:0 0 8px;line-height:1.02}
+    .headline{display:flex;gap:12px;align-items:center}
+    .role{background:linear-gradient(90deg,var(--accentB),var(--accentA));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+    .lead{color:var(--muted);margin-bottom:18px}
+
+    /* skill badges */
+    .skills{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .pill{padding:8px 12px;border-radius:999px;font-weight:800;font-size:13px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .pill.html{color:#ff6b6b;border-color:rgba(255,107,107,0.12);box-shadow:0 6px 16px rgba(255,107,107,0.06)}
+    .pill.css{color:#5ca3ff;border-color:rgba(92,163,255,0.12);box-shadow:0 6px 16px rgba(92,163,255,0.06)}
+    .pill.js{color:#ffd166;border-color:rgba(255,209,102,0.12);box-shadow:0 6px 16px rgba(255,209,102,0.06)}
+
+    /* CTA */
+    .cta{display:flex;gap:12px;align-items:center}
+    .btn{
+      padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:800;font-size:14px;letter-spacing:0.3px;transition:all .28s var(--smooth);box-shadow:0 8px 30px rgba(2,6,23,0.5)
+    }
+    .btn.primary{background:linear-gradient(90deg,var(--accentA),var(--accentB));color:#fff}
+    .btn.primary:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(59,130,246,0.18)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* projects grid */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:20px}
+    .card-proj{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03);transition:transform .35s var(--smooth), box-shadow .35s var(--smooth);overflow:hidden}
+    .card-proj:hover{transform:translateY(-8px) rotate(-0.5deg);box-shadow:0 22px 60px rgba(2,6,23,0.6)}
+    .card-proj h3{margin:0 0 8px;color:var(--accentA)}
+    .card-proj p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* profile side */
+    .profile{display:flex;flex-direction:column;gap:14px}
+    .avatar{width:260px;height:260px;border-radius:18px;overflow:hidden;margin:0 auto;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 60px rgba(2,6,23,0.6);transform:rotate(-2deg);transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+    .avatar:hover{transform:rotate(0deg) scale(1.02)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{text-align:center;font-weight:800;font-size:16px}
+    .small{text-align:center;color:var(--muted);font-size:13px}
+
+    /* contact list */
+    .contact{display:flex;flex-direction:column;gap:8px}
+    .link{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:#eaf6ff;font-weight:700;transition:transform .25s,var(--smooth)}
+    .link:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(2,6,23,0.6)}
+    .copy{cursor:pointer}
+
+    /* footer */
+    footer{margin-top:40px;text-align:center;color:rgba(255,255,255,0.6);font-size:13px;padding-bottom:40px}
+
+    /* reveal animations via intersection observer */
+    .reveal{opacity:0;transform:translateY(18px) scale(.98);transition:all .8s var(--smooth)}
+    .reveal.show{opacity:1;transform:translateY(0) scale(1)}
+
+    /* floating shapes using pseudo elements */
+    .fancy-lines{position:relative}
+    .fancy-lines::before, .fancy-lines::after{content:'';position:absolute;inset:0;pointer-events:none}
+    .fancy-lines::before{background:linear-gradient(90deg,rgba(255,255,255,0.02) 0 50%,transparent 50%);mask:linear-gradient(#000,transparent);transform:skewX(-12deg);opacity:0.8}
+
+    /* responsiveness */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .avatar{width:220px;height:220px}
+    }
+
+    @media (max-width:520px){
+      .wrap{padding:18px}
+      nav{display:none}
+      h1{font-size:26px}
+    }
+
+    /* small decorative underline animation */
+    .underlined{position:relative;display:inline-block}
+    .underlined::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:6px;border-radius:8px;background:linear-gradient(90deg,var(--accentB),var(--accentA));transform:scaleX(0);transform-origin:left;transition:transform .45s var(--smooth)}
+    .underlined:hover::after{transform:scaleX(1)}
+
+  </style>
+</head>
+<body>
+
+  <div class="bg-anim" aria-hidden>
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">JUGANTA KAUSHIK BORUAH</div>
+        <div class="tag">NIT Silchar • B.Tech CSE • 2025–2029</div>
+      </div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section class="glass reveal" id="about">
+        <div class="headline">
+          <h1>Frontend Developer • <span class="role">HTML · CSS · JavaScript</span></h1>
+        </div>
+        <p class="lead">I’m <strong class="underlined">Juganta Kaushik Boruah</strong>, a first‑year BTech (CSE) student at NIT Silchar (2025–2029). I build fast, modern and responsive landing pages, personal portfolios and small business websites — using <em>only</em> HTML, CSS and JavaScript.</p>
+
+        <div class="skills">
+          <div class="pill html">HTML</div>
+          <div class="pill css">CSS</div>
+          <div class="pill js">JavaScript</div>
+        </div>
+
+        <div class="cta">
+          <button class="btn primary" onclick="scrollTo('projects')">See Projects</button>
+          <button class="btn ghost" onclick="copyPhone()">Copy Phone</button>
+        </div>
+
+        <div class="fancy-lines" style="margin-top:20px">
+          <div class="projects" id="projects">
+            <article class="card-proj reveal">
+              <h3>Landing Page — Startup</h3>
+              <p>Create a performance-focused landing with hero, features, pricing and contact sections. Lighthouse-friendly HTML, CSS and tiny JS for interaction.</p>
+              <div class="meta"><div class="tag">HTML • CSS • JS</div><div style="color:var(--muted)">1–2 days</div></div>
+            </article>
+
+            <article class="card-proj reveal">
+              <h3>Personal Portfolio</h3>
+              <p>Minimal, lightweight portfolio with smooth scrolling, project gallery and an easy contact CTA — ideal for freelancers and students.</p>
+              <div class="meta"><div class="tag">HTML • CSS • JS</div><div style="color:var(--muted)">1–3 days</div></div>
+            </article>
+
+            <article class="card-proj reveal">
+              <h3>Business Website</h3>
+              <p>Multi-section site including services, testimonials and contact. SEO-friendly semantic markup and mobile-first styles.</p>
+              <div class="meta"><div class="tag">HTML • CSS • JS</div><div style="color:var(--muted)">3–5 days</div></div>
+            </article>
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="profile">
+        <div class="glass" style="padding:20px;text-align:center">
+          <div class="avatar" title="Juganta Kaushik Boruah">
+            <img src="hello.jpg" alt="Juganta Kaushik Boruah">
+          </div>
+          <div class="name" style="margin-top:12px">JUGANTA KAUSHIK BORUAH</div>
+          <div class="small">BTech (CSE) • NIT Silchar • Batch 2025–2029</div>
+
+          <div class="contact" id="contact" style="margin-top:14px">
+            <a class="link" href="#" onclick="openLink(event,'https://linkedin.com/in/juganta-kaushik-9153a0374')">🔗 LinkedIn • Juganta kaushik Boruah</a>
+            <a class="link" href="#" onclick="openLink(event,'https://instagram.com/jugantakaushik_official')">📸 Instagram • @jugantakaushik_official</a>
+            <a class="link copy" href="#" onclick="copyPhone(event)">📞 Phone • <span id="phoneText">+91-9954358621</span></a>
+          </div>
+
+          <div style="margin-top:14px;color:var(--muted);font-size:13px">Available for freelance: landing pages, portfolios & small business sites. Fast turnaround and clean code (HTML, CSS, JS).</div>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>
+      <div>Built with <strong>HTML</strong>, <strong>CSS</strong> & <strong>JavaScript</strong> • Replace placeholders with your real links to go live.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Smooth scroll helper
+    function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});} 
+
+    // Copy phone helper
+    function copyPhone(e){
+      const phone = '+91-XXXXXXXXXX';
+      if(navigator.clipboard){navigator.clipboard.writeText(phone).then(()=>{alert('Phone number copied to clipboard. Replace placeholder with your real number in the file.');});}
+      else{const t=document.createElement('textarea');t.value=phone;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();alert('Phone number copied to clipboard. Replace placeholder with your real number in the file.');}
+      if(e) e.preventDefault();
+    }
+    function openLink(e,url){e.preventDefault();window.open(url,'_blank')}
+
+    // IntersectionObserver reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){ent.target.classList.add('show');observer.unobserve(ent.target)}
+      })
+    },{threshold:0.16});
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    });
+
+    // Tiny interactive: tilt cards on mousemove
+    document.addEventListener('mousemove', (e)=>{
+      document.querySelectorAll('.card-proj').forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        card.style.transform = `perspective(800px) rotateY(${x/40}deg) rotateX(${ -y/50 }deg)`;
+      });
+    });
+    document.addEventListener('mouseleave', ()=>{
+      document.querySelectorAll('.card-proj').forEach(c=>{c.style.transform='none'});
+    });
+  </script>
+</body>
+</html>
